@@ -12,8 +12,10 @@ def myTimeMeasure[R](block: => R): R = {
 
 
 
+// 
+
 val returnValue = myTimeMeasure {
-  val lines = sc.textFile("file:/home/sbvb/zzz/*.txt")
+  val lines = sc.textFile("hdfs:/user/root/maxword3000/*.txt")
   val words = lines.flatMap(_.split(" ")).filter(_ != "")
   println("Number of words="+words.count())
   val counts = words.map(word => (word,1))
@@ -26,7 +28,24 @@ val returnValue = myTimeMeasure {
 
 
 
-// spark measure time test
-// val returnValue = myTimeMeasure { 1 to 1000 sum }
-// println("returnValue="+ returnValue)
+/****************************************************************
+result for aws spark cluster, 1 node
+Number of words=4501500                                                         
+(3000,a3000)                                                                    
+(2999,a2999)
+(2998,a2998)
+(2997,a2997)
+(2996,a2996)
+(2995,a2995)
+(2994,a2994)
+(2993,a2993)
+(2992,a2992)
+(2991,a2991)
+Elapsed time: 6.30087241922E8us
+Elapsed time: 630087.241922ms
+Elapsed time: 630.087241922s
+
+
+
+****************************************************************/
 
